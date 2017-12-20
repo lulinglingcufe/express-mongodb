@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+  
+    <header id="header">
+      <div class="container">
+        <div class="header">
+          <div class="logo">
+            <a href="/"><img src="/images/<%= user.username %>.png" alt=""></a>
+          </div>
+          <div class="title">
+            <a href="/">欢迎来到个人信息管理页面</a>
+          </div>
+          <div class="my">
+            <% if(user && user.username){ %>
+			
+			
+            <a href="/admin"><%= user.username %></a>
+            <a href="/logout" class="logout">退出</a>
+			<a href="/logout" class="account">用户账户：<%= user.useraccount %></a>
+			
+			
+			
+            <% }else{ %>
+              <a href="/loginTest">登录和注册</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+   </header>
+
+	
+    <section id="table">
+      <div class="container">
+        <h3><a href="/admin/adminAdd"><button type="button" class="btn btn-info" name="button">添加地址</button></a></h3>
+        <table class="table table-bordered">
+          <tr>
+            <th>地址状态</th>
+            <th>收货人</th>
+            <th>联系电话</th>
+            <th>收货地址</th>
+            <th>修改</th>
+            <th>删除</th>
+			<th>设为默认收件地址</th>
+          </tr>
+
+          <% items.forEach(function(item){ %>
+          <tr>
+            <td><%= item.AddressStatus %></td>
+            <td><%= item.recevierName %></td>
+            <td><%= item.recevierPhone %></td>
+            <td><%= item.recevierAddress %></td>
+            <td><a href="/admin/adminUpdate?_id=<%= item._id %>"><button type="button" class="btn btn-success btn-xs" name="button">修改</button></a></td>
+            <td><a href="/admin/adminDel?_id=<%= item._id %>"><button type="button" class="btn btn-danger btn-xs" name="button">删除</button></a></td>
+			<td><a href="/admin/adminDefault?_id=<%= item._id %>"><button type="button" class="btn btn-danger btn-xs" name="button">设为默认地址</button></a></td>
+
+          </tr>
+          <% }); %>
+
+        </table>
+      </div>
+    </section>
+	
+	
+	
+	
+  </body>
+</html>

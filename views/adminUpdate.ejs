@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+    <header id="header">
+      <div class="container">
+        <div class="header">
+          <div class="logo">
+            <a href="/"><img src="/images/logo.png" alt=""></a>
+          </div>
+          <div class="title">
+            <a href="/">欢迎来到我的博客</a>
+          </div>
+          <div class="my">
+            <% if(user && user.username){ %>
+            <a href="/admin"><%= user.username %></a>
+            <a href="/logout" class="logout">退出</a>
+            <% }else{ %>
+              <a href="/login">登录</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="table">
+      <div class="container">
+        <form action="/admin/adminUpdate" method="post">
+		
+		  <div class="form-group">
+            <label >收货人姓名</label>
+            <input type="text" name="recevierName" class="form-control" value="<%= item.recevierName %>">
+          </div>
+		  
+		  <div class="form-group">
+            <label >收货人联系电话</label>
+            <input type="text" name="recevierPhone" class="form-control" value="<%= item.recevierPhone %>">
+          </div>
+		  
+          <div class="form-group">
+            <label >收货地址</label>
+            <textarea name="recevierAddress" class="form-control"  rows="6" ><%= item.recevierAddress %></textarea>
+          </div>
+		  
+          <input type="hidden" name="Id" value="<%= item._id %>">
+          <input type="submit" name="" class="btn btn-info" value="保存">
+        </form>
+      </div>
+    </section>
+
+  </body>
+</html>

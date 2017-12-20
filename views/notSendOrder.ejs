@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+  
+    <header id="header">
+      <div class="container">
+        <div class="header">
+          <div class="logo">
+            <a href="/"><img src="/images/<%= user.username %>.png" alt=""></a>
+          </div>
+          <div class="title">
+            <a href="/">欢迎来到订单管理页面</a>
+          </div>
+          <div class="my">
+            <% if(user && user.username){ %>
+			
+			
+            <a href="/admin"><%= user.username %></a>
+            <a href="/logout" class="logout">退出</a>
+			<a href="/logout" class="account">用户账户：<%= user.useraccount %></a>
+			
+			
+			
+            <% }else{ %>
+              <a href="/loginTest">登录和注册</a>
+            <% } %>
+          </div>
+        </div>
+      </div>	  
+    </header>
+
+	
+	
+    <section id="table">
+      <div class="container">
+	<a href="/order"><button type="button" class="btn btn-info" name="button"  style ="margin-bottom=30px; "  >所有订单</button></a>
+<a href="/notSendOrder"><button type="button" class="btn btn-info" name="button">未发货订单</button></a>
+<a href="/sendOrder"><button type="button" class="btn btn-info" name="button">临时发货选项</button></a>	
+	
+		<table class="table table-bordered">
+          <tr>
+            <th>产品</th>
+            <th>价格</th>
+            <th>单位</th>
+            <th>是否发货</th>
+            <th>下单时间</th>
+			<th>收件人</th>
+			<th>收件人联系方式</th>
+			<th>地址</th>
+			
+
+			
+          </tr>
+
+          <% items.forEach(function(item){ %>
+          <tr>
+            <td><%= item.itemname %></td>
+            <td><%= item.prize %></td>
+            <td><%= item.point_type %></td>
+            <td><%= item.is_send %></td>
+            <td><%= item.date %></td>
+			<td><%= item.recevierName %></td>
+			<td><%= item.recevierPhone %></td>
+			<td><%= item.recevierAddress %></td>
+			
+           </tr>
+          <% }); %>
+
+        </table>
+      </div>
+    </section>
+	
+	
+	
+	
+  </body>
+</html>
