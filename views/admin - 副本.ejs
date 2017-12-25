@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html  lang="zh-CN">
+  <head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>积分管理系统</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+  <body>
+  
+    <header id="header">
+      <div class="container">
+        <div class="header">
+          <div class="logo">
+            <a href="/"><img src="/images/<%= user.username %>.png" alt=""></a>
+          </div>
+          <div class="title">
+            <a href="/">欢迎来到个人信息管理页面</a>
+          </div>
+          <div class="my">
+            <% if(user && user.username){ %>
+			
+			
+            <a href="/admin"><%= user.username %></a>
+            <a href="/logout" class="logout">退出</a>
+			<a href="/logout" class="account">用户账户：<%= user.useraccount %></a>
+			
+			
+			
+            <% }else{ %>
+              <a href="/loginTest">登录和注册</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+   </header>
+
+
+	
+    <section id="table">
+      <div class="container">
+        <h3><a href="/admin/adminAdd"><button type="button" class="btn btn-info" name="button">添加地址</button></a></h3>
+        <table class="table table-bordered">
+          <tr>
+            <th>地址状态</th>
+            <th>收货人</th>
+            <th>联系电话</th>
+            <th>收货地址</th>
+            <th>修改</th>
+            <th>删除</th>
+			<th>设为默认收件地址</th>
+          </tr>
+
+          <% items.forEach(function(item){ %>
+          <tr>
+            <td selected="selected"><%= item.AddressStatus %></td>
+            <td><%= item.recevierName %></td>
+            <td><%= item.recevierPhone %></td>
+            <td><%= item.recevierAddress %></td>
+            <td><a href="/admin/adminUpdate?_id=<%= item._id %>"><button type="button" class="btn btn-success btn-xs" name="button">修改</button></a></td>
+            <td><a href="/admin/adminDel?_id=<%= item._id %>"><button type="button" class="btn btn-danger btn-xs" name="button">删除</button></a></td>
+			<td><a href="/admin/adminDefault?_id=<%= item._id %>&add=<%= item.AddressStatus %>&  >  <button type="button" class="btn btn-info btn-xs"  name="button">设为默认地址</button></a></td>
+          
+          </tr>
+          <% }); %>
+
+        </table>
+      </div>
+    </section>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+
+
+
+
+/*
+		$(".btn-info").click(function(){
+
+		var btn = $(this);
+		var td = $(this).parent().find("td:selected").text();
+
+			$.post("/checkDefault",{content:"hello"},function(result){
+				if(result){
+					console.log(result);
+					//btn.empty().text('已兑换');
+					//btn.empty().text(thing);
+	
+					}
+			})
+			
+		})
+	*/	
+		
+		
+		
+		
+		
+		
+		
+	</script>
+	
+	
+	
+	
+  </body>
+</html>

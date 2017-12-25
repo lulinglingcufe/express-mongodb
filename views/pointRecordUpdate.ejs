@@ -10,7 +10,7 @@
 
     <header id="header" style="height: 65px;">
       <div class="container">
-	  <div class="header">
+        <div class="header">
           <div>
 			<a href="/admin"><button class="btn btn-success">返回</button></a>
           </div>
@@ -24,7 +24,7 @@
           </div>
 		  
 		  <div class="title" >
-            <h3><%= user.username %> 用户欢迎您！可修改收件人地址</h3>
+            <h3><a href="/admin/adminAdd">admin 用户欢迎您！请添加收件人地址</a></h3>
           </div>
 		  
 
@@ -33,35 +33,48 @@
          </div>
 		  
 		  
-		  
         </div>
       </div>
     </header>
 
     <section id="table">
       <div class="container">
-        <form action="/admin/adminUpdate" method="post">
-		
+        <form action="/pointRecordUpdate" method="post">
+          
 		  <div class="form-group">
-            <label >收货人姓名</label>
-            <input type="text" name="recevierName" class="form-control" value="<%= item.recevierName %>">
+            <label >事件</label>
+            <input type="text" name="envent" class="form-control" value="<%= item.envent %>">
           </div>
 		  
 		  <div class="form-group">
-            <label >收货人联系电话</label>
-            <input type="text" name="recevierPhone" class="form-control" value="<%= item.recevierPhone %>">
+            <label >发放用户名</label>
+            <input type="text" name="username" class="form-control" value="<%= item.username %>">
           </div>
 		  
           <div class="form-group">
-            <label >收货地址</label>
-            <textarea name="recevierAddress" class="form-control"  rows="6" ><%= item.recevierAddress %></textarea>
+            <label >发放账户</label>
+            <input name="useraccount" class="form-control"   value="<%= item.useraccount %>"></textarea>
           </div>
 		  
-          <input type="hidden" name="Id" value="<%= item._id %>">
+		   <div class="form-group">
+            <label >单位</label>
+            <input name="point_type" class="form-control"  value="<%= item.point_type %>"></textarea>
+          </div>
+		  
+		  <div class="form-group">
+            <label >发放数量</label>
+            <input name="prize" class="form-control" value="<%= item.prize %>"></textarea>
+          </div>
+		  
+		  
+		  
+          <input type="hidden" name="send_adimin" value="admin">
+
           <input type="submit" name="" class="btn btn-info" value="保存">
         </form>
       </div>
-    </section>
+
+	
 
   </body>
 </html>

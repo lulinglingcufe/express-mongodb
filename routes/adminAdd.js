@@ -19,6 +19,23 @@ router.post('/adminAdd', function(req, res, next){
   var RecevierName = req.body.recevierName;
   var RecevierPhone = req.body.recevierPhone;
   var RecevierAddress = req.body.recevierAddress;
+  
+  
+  
+ 	if(!RecevierName || !RecevierPhone || !RecevierAddress ){
+		res.send("注册信息不能为空！");
+		return;
+	}
+	 
+  
+  
+  if(!(/^1\d{10}$/.test(RecevierPhone))){
+	  res.send("手机号码错误！");
+	  return;
+	  
+  }
+  
+  
   var Author = req.body.Author;
   var date = new Date(),
       yy = date.getFullYear(),

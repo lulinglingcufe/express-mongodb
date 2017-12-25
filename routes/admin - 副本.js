@@ -7,19 +7,20 @@ router.get('/', function(req, res, next) {
   var user = req.session.user;
   if(user && user.username){
 	
-	
-	//Model.Buy.find({"content":"文字1"}, function(err, docs){
-	//把所有此用户的订单列出
-    Model.Buy.find({"username":user.username,is_send:"no"}, function(err, docs){
+  
+	//Model.Article.find({"content":"文字1"}, function(err, docs){\
+	//返回“该“用户的收件人信息
+    Model.Recevier.find({"author":user.username}, function(err, docs){
       if(err){
         console.log(err);
         return;
       }else{
-		res.render('sendOrder',{user: user, items: docs});		
+		  
+		res.render('admin',{user: user, items: docs});
         return;
       }
     })
-  
+	
   }else{
     res.redirect('/loginTest');
     return;

@@ -58,10 +58,6 @@ router.post('/loginTestsignIn', function(req, res, next){
     })  
   
   
-  
-  
-  
-  
 })
 
 
@@ -72,6 +68,12 @@ router.post("/loginTestsignUp",function(req,res,next){
 	var Registerpass2 = req.body.Registerpass2;
 	var Registeraccount = req.body.Registeraccount;
 
+	
+  var RecevierName = req.body.recevierName;
+  var RecevierPhone = req.body.recevierPhone;
+  var RecevierAddress = req.body.recevierAddress;
+  
+  
 	console.log(Registeraccount);
 	
 	if(!Registeruser || !Registerpass || !Registerpass2 || !Registeraccount){
@@ -80,11 +82,22 @@ router.post("/loginTestsignUp",function(req,res,next){
 	}
 	
 	
+   if(!RecevierName || !RecevierPhone || !RecevierAddress ){
+		res.send("默认联系人信息不能为空！");
+		return;
+	}
+	
+	
 	if(Registerpass2 !== Registerpass){
     res.send('两次密码不一样');
     return;
 	}
-		
+	
+  if(!(/^1\d{10}$/.test(RecevierPhone))){
+	  res.send("手机号码错误！");
+	  return;
+	  
+  }		
 	
 	  var userData = {
   username: Registeruser,
@@ -92,7 +105,25 @@ router.post("/loginTestsignUp",function(req,res,next){
   useraccount: Registeraccount
   }
 	
-	
+  var Author = Registeruser;
+  var date = new Date(),
+      yy = date.getFullYear(),
+      MM = date.getMonth() + 1,
+      dd = date.getDate(),
+      hh = date.getHours(),
+      mm = date.getMinutes(),
+      ss = date.getSeconds();
+
+  var newRecevier = new Model.Recevier({
+    recevierName: RecevierName,
+    author: Author,
+	recevierPhone: RecevierPhone,
+    date: yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm + ':' + ss,
+	recevierAddress:RecevierAddress,
+	AddressStatus:"默认地址"
+  });
+
+
 	
   Model.User.findOne({username: Registeruser}, function(err, doc){
     if(err){
@@ -101,20 +132,34 @@ router.post("/loginTestsignUp",function(req,res,next){
     }else if(doc){
       res.send('用户名已经存在');
       return;
-    }else{
+    }else{	
+		
       Model.User.create(userData, function(err, doc){
         if(err){
           console.log(err);
           return;
         }else{
           console.log('创建用户成功');
-          res.redirect('/loginTest');
+          
         }
       })
     }
   })
   
-  
+ 
+  newRecevier.save(function(err){
+    if(err){
+      console.log(err);
+      return;
+    }else{
+      console.log('添加初始默认地址成功');
+	  res.redirect('/loginTest');
+	  
+    }
+  })	
+
+
+ 
   
 
 })

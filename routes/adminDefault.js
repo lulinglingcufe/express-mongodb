@@ -6,6 +6,8 @@ var Model = require('../data/module');
 router.get('/adminDefault', function(req, res, next) {
   var user = req.session.user;
   var Id = req.query._id;
+  var add = req.query.add;
+  
   var newArticle = {
     AddressStatus : "默认地址",
 
@@ -14,27 +16,13 @@ router.get('/adminDefault', function(req, res, next) {
   var newArticle2 = {
     AddressStatus : "可选地址",
 
-  };
-
+  };  
   
-  /*
-	//如果已经是默认地址，则直接返回/admin页面
-    Model.Recevier.findOne({author: user.username,AddressStatus:"默认地址",_id: Id}, function(err, doc){
-      if(err){
-        console.log(err);
-        return;
-      }else{
-		  if(doc){
-			  req.session.userRecevier = {recevierName: doc.recevierName,recevierPhone: doc.recevierPhone,recevierAddress:doc.recevierAddress};
-			  res.redirect('/admin');
-		  }	
-		return;
-      }
-    })  
-*/
-
-
   
+  
+  if(add == '可选地址'){
+	  //则进行修改
+	 
   Model.Recevier.update({author: user.username, AddressStatus:"默认地址"}, {$set: newArticle2}, function(err,doc){
     if(err){
       console.log(err);
@@ -67,7 +55,26 @@ router.get('/adminDefault', function(req, res, next) {
         res.redirect('/admin');
 		return;
       }
-    })
+    })	 
+	 
+	 
+	 
+	 
+	 
+	 
+  }else{
+	  //否则不修改
+	  
+	res.redirect('/admin');
+	return;
+  }
+  
+  
+  
+
+
+  
+
 
 
 

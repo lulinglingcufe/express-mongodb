@@ -12,7 +12,10 @@ var index = require('./routes/index');
 var logout = require('./routes/logout');
 var loginTest = require('./routes/loginTest');
 
-var test1 = require('./routes/test1');
+var test1 = require('./routes/test1');  //分页测试
+var test2 = require('./routes/test2');   //发货删除货物测试
+var test3 = require('./routes/test3');   //测试
+var PointRecord = require('./routes/PointRecord');   //测试
 
 var adminTest = require('./routes/adminTest');
 
@@ -20,15 +23,12 @@ var adminTest = require('./routes/adminTest');
 var admin = require('./routes/admin');
 var adminAdd = require('./routes/adminAdd');
 var adminUpdate = require('./routes/adminUpdate');
-var adminDel = require('./routes/adminDel');
 var adminDefault = require('./routes/adminDefault');
 
 var order = require('./routes/order');
 var notSendOrder = require('./routes/notSendOrder');
 
-var sendOrder = require('./routes/sendOrder');
-var OrderDel = require('./routes/OrderDel');
-var OrderSend = require('./routes/OrderSend');
+
 
 var app = express();
 
@@ -59,6 +59,11 @@ app.use('/', loginTest);
 app.use('/', logout);
 
 app.use('/', test1);
+app.use('/', test2);  //包括了删除还有发货操作，在一个js脚本里面
+app.use('/', test3);
+
+app.use('/', PointRecord);
+
 
 //app.use('/adminTest', adminTest);
 
@@ -67,18 +72,16 @@ app.use('/', adminTest);
 
 
 
-app.use('/admin', admin);
+//app.use('/admin', admin);
+app.use('/', admin);
 app.use('/admin', adminAdd);
-app.use('/admin', adminDel);
 app.use('/admin', adminUpdate);
 app.use('/admin', adminDefault);
 
-app.use('/order', order);
-app.use('/notSendOrder', notSendOrder);
+app.use('/', order);
+app.use('/', notSendOrder);
 
-app.use('/sendOrder', sendOrder);
-app.use('/sendOrder', OrderDel);
-app.use('/sendOrder', OrderSend);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

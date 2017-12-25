@@ -15,12 +15,14 @@
 		</div>
 		<div class="navbar">
 			<ul class="nav nav-pills">
-			    <li role="presentation" class="active"><a href="/index">积分兑换</a></li>
+			    <li role="presentation" class="active"><a href="/adminTest">积分兑换</a></li>
 			    <li role="presentation"><a href="/trans">积分赠送</a></li>
 				<li role="presentation"><a href="/exchange">异业互兑</a></li>
 				<li role="presentation"><a href="/blockchain">区块链浏览器</a></li>
 				<li role="presentation"><a href="/admin">个人信息管理</a></li>
 				<li role="presentation"><a href="/order">订单管理</a></li>
+				<li role="presentation"><a href="/PointRecord">积分发放记录</a></li>				
+				<li role="presentation"><a href="/logout">退出</a></li>
 			</ul>
 		</div>
 	</div>
@@ -55,7 +57,7 @@
 	
 		<div>
 			<h1 style="margin-left:570px;">积分兑换商城</h1>
-			<p style="margin-left:280px;margin-top: 20px">兑换须知：以下商品均使用积分进行结算、一旦点击兑换，账户会自动减去相应金额，然后按照默认预留地址寄送</p>
+			<p style="margin-left:280px;margin-top: 20px">兑换须知：以下商品均使用积分进行结算；一旦点击兑换，账户会自动减去相应金额，然后按照默认收件人地址寄送。</p>
 			<hr>
 		</div>
 
@@ -446,9 +448,6 @@
 			var sage = $(this).parent().find("option:selected").text();
 			var thing = $(this).parent().find("span").text();
 			
-			console.log(sage);
-			console.log(thing);
-			
 			var arr = sage.split(" ");
 			var sort = arr[1];
 			var amount = parseInt(arr[0]);
@@ -458,7 +457,7 @@
 			
 			
 			
-			$.post("/buy",{sage:sage,thing:thing},function(result){
+			$.post("/buy",{sage:sage,thing:thing,content:"hello world!"},function(result){
 				if(result){
 					console.log(result);
 					btn.empty().text('已兑换');
@@ -482,6 +481,9 @@
 					}
 			})
 		})
+		
+		
+		
 	</script>
 	</body>
 </html>

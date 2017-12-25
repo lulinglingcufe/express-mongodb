@@ -69,8 +69,9 @@ router.post('/buy',function(req,res,next){
 	var account1 = web3.eth.accounts[0];
 	var account2 = req.session.user.useraccount;
 	var sage = req.body.sage;
+	var content = req.body.content;
 	var thing = req.body.thing;
-	//console.log(thing);
+	//console.log(content);
 	var arr = sage.split(" ");
 	var amount = parseInt(arr[0]);
 	var sort = arr[1];

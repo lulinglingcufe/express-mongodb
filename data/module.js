@@ -39,13 +39,16 @@ var recevierSchema = new mongoose.Schema({
   AddressStatus: String  //是否为默认收件人
 });
 
-//默认收件人信息
-var DefaultRecevierSchema = new mongoose.Schema({
-  recevierName: String,
-  author: String,
-  recevierPhone: String,
-  date: String,
-  recevierAddress: String
+//积分发放记录
+var givepointrecordSchema = new mongoose.Schema({
+  envent: String,  //事件
+  username: String,   //发放用户名
+  useraccount: String,  //发放账户
+  date: String,  //发放时间
+  prize: String,  //发放数量 
+  point_type: String,  //发放单位
+  send_adimin: {type: String, default: "adimin"}  //发放人(默认admin)
+
 });
   
   
@@ -59,7 +62,7 @@ var Model = {
   User: mongoose.model('User', userSchema),
   Buy: mongoose.model('Buy', userBuySchema),
   Recevier: mongoose.model('Recevier', recevierSchema),
-  DefaultRecevier: mongoose.model('DefaultRecevier', DefaultRecevierSchema)
+  GivePointRecord: mongoose.model('GivePointRecord', givepointrecordSchema)
   
 };
 
