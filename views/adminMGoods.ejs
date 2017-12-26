@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html  lang="zh-CN">
   <head>
-    <meta charset="utf-8">
-    <title></title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>积分管理系统</title>
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/main.css">
   </head>
-  <body>
-	
+  <body   style="background-color:#F5F5F5" >
+
+
+	<div class="navall">
+		<div class="logo">
+			<h1>管理员积分管理</h1>
+		</div>
+		<div class="navbar">
+			<ul class="nav nav-pills">
+			    <li role="presentation" ><a href="/adminTest">积分兑换</a></li>
+			    <li role="presentation"><a href="/trans">积分赠送</a></li>
+				<li role="presentation"><a href="/exchange">异业互兑</a></li>
+				<li role="presentation"><a href="/blockchain">区块链浏览器</a></li>
+				<li role="presentation" ><a href="/adminMpoint">积分发放记录管理</a></li>
+				<li role="presentation" class="active"><a href="/adminMGoods">订单管理</a></li>
+				<li role="presentation"><a href="/logout">退出</a></li>
+				
+			</ul>
+		</div>
+	</div>
+
 	
     <section id="table">
       <div class="container">
@@ -15,7 +35,7 @@
 <a href="/notSendOrder"><button type="button" class="btn btn-info" name="button">未发货订单</button></a>
 <a href="/sendOrder"><button type="button" class="btn btn-info" name="button">临时发货选项</button></a>	
 	  
-		<table class="table table-bordered">
+		<table style="table-layout: inherit;"  class="table table-bordered">
           <tr>
 		    <th>下单人</th>
             <th>产品</th>

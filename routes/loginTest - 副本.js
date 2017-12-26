@@ -149,29 +149,14 @@ router.post("/loginTestsignUp",function(req,res,next){
   }
 
 	
-  Model.User.findOne(
-  
-  { $or : [ //多条件，数组
-            {username : Registeruser},
-            {useraccount : Registeraccount}
-        ]}
-		
-		, function(err, doc){
+  Model.User.findOne({username: Registeruser}, function(err, doc){
     if(err){
       console.log(err);
       return;
     }else if(doc){
-      res.send('用户名或以太坊账户已经存在');
+      res.send('用户名已经存在');
       return;
     }else{	
-
-	
-	
-	
-	
-	
-	
-	
 		
       Model.User.create(userData, function(err, doc){
         if(err){

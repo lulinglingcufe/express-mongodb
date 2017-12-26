@@ -3,23 +3,35 @@ var router = express.Router();
 var Model = require('../data/module');
 
 /* GET users listing. */
-router.get('/test3', function(req, res, next) {
+router.get('/adminMpoint', function(req, res, next) {
+	
+	
+	  var adminuser = req.session.adminuser;
+  if(adminuser && adminuser.username){
 	
     Model.GivePointRecord.find({_id: {$exists: true}},function(err, docs){
       if(err){
         console.log(err);
         return;
       }else{
-		res.render('test3',{items: docs});		
+		res.render('adminMpoint',{items: docs});		
         return;
       }
     })
+	
+	
+	  }else{
+    res.redirect('/adminlogin');
+    return;
+  }
 	
 });
 
 
 router.get('/pointRecordDel', function(req, res, next) {
-
+	  var adminuser = req.session.adminuser;
+  if(adminuser && adminuser.username){
+	  
     var _id = req.query._id;
     Model.GivePointRecord.remove({_id: _id}, function(err){
       if(err){
@@ -27,10 +39,16 @@ router.get('/pointRecordDel', function(req, res, next) {
         return;
       }else{
         console.log('删除积分发放记录'); 
-        res.redirect('/test3');
+        res.redirect('/adminMpoint');
       }
     })
 
+	
+		  }else{
+    res.redirect('/adminlogin');
+    return;
+  }
+	
 	
 });
 
@@ -39,7 +57,9 @@ router.get('/pointRecordDel', function(req, res, next) {
 
 /* GET users listing. */
 router.get('/pointRecordUpdateAndSend', function(req, res, next) {
-
+	  var adminuser = req.session.adminuser;
+  if(adminuser && adminuser.username){
+	  
     var _id = req.query._id;
     Model.GivePointRecord.findOne({_id: _id}, function(err, doc){
       if(err){
@@ -50,6 +70,14 @@ router.get('/pointRecordUpdateAndSend', function(req, res, next) {
         return;
       }
     })
+	
+	
+		  }else{
+    res.redirect('/adminlogin');
+    return;
+  }
+		
+	
 
 });
 
@@ -92,7 +120,7 @@ router.post('/pointRecordUpdateAndSend', function(req, res, next){
     }
   })
  
- res.redirect('/test3');
+ res.redirect('/adminMpoint');
   
   
   
@@ -103,7 +131,9 @@ router.post('/pointRecordUpdateAndSend', function(req, res, next){
 
 /* GET users listing. */
 router.get('/pointRecordUpdate', function(req, res, next) {
-
+ 	  var adminuser = req.session.adminuser;
+  if(adminuser && adminuser.username){
+	  
     var _id = req.query._id;
     Model.GivePointRecord.findOne({_id: _id}, function(err, doc){
       if(err){
@@ -114,11 +144,18 @@ router.get('/pointRecordUpdate', function(req, res, next) {
         return;
       }
     })
+	
+	
+			  }else{
+    res.redirect('/adminlogin');
+    return;
+  }
+		
 
 });
 
 router.post('/pointRecordUpdate', function(req, res, next){
- 
+
 
 
  var Id = req.body.Id;
@@ -136,17 +173,17 @@ router.post('/pointRecordUpdate', function(req, res, next){
       mm = date.getMinutes(),
       ss = date.getSeconds();
 
-  var newGivePointRecord = new Model.GivePointRecord({
+  var newGivePointRecord = {
 	  
   envent: Envent,  //事件
   username: Username,   //发放用户名
   useraccount: Useraccount,  //发放账户
   date: yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm + ':' + ss,  //发放时间
   prize: Prize,  //发放数量 
-  point_type: Point_type,  //发放单位
+  point_type: Point_type ,  //发放单位
   send_adimin: Send_adimin  //发放人(默认admin)	  
 	
-  });
+  };
   //发放时间也更新了。
   Model.GivePointRecord.update({_id: Id}, {$set: newGivePointRecord}, function(err,doc){
     if(err){
@@ -156,7 +193,7 @@ router.post('/pointRecordUpdate', function(req, res, next){
 		 console.log(Prize);
       console.log('修改成功');
       console.log(doc);
-      res.redirect('/test3');
+      res.redirect('/adminMpoint');
     }
   })
   
@@ -170,22 +207,21 @@ router.post('/pointRecordUpdate', function(req, res, next){
 
 
 
-
-
-
-
-
-
-
-
-
-
 /* GET users listing. */
 router.get('/pointRecordAdd', function(req, res, next) {
-
+	  var adminuser = req.session.adminuser;
+  if(adminuser && adminuser.username){
+	  
     res.render('pointRecordAdd', {});
 	
     return;
+	
+	
+ }else{
+    res.redirect('/adminlogin');
+    return;
+  }
+	
 
 });
 
@@ -241,7 +277,7 @@ router.post('/pointRecordAdd',function(req,res,next){
       return;
     }else{
       console.log('成功添加积分发放记录');
-	   res.redirect('/test3');
+	   res.redirect('/adminMpoint');
     }
   })
  

@@ -24,7 +24,7 @@
           </div>
 		  
 		  <div class="title" >
-            <h3><a href="/admin/adminAdd">admin 用户欢迎您！请更新积分发放记录</a></h3>
+            <h3><a href="/admin/adminAdd">admin 用户欢迎您！请添加积分发放记录</a></h3>
           </div>
 		  
 
@@ -39,7 +39,7 @@
 
     <section id="table">
       <div class="container">
-        <form action="/pointRecordUpdate" method="post">
+        <form action="/pointRecordUpdateAndSend" method="post">
           
 		  <div class="form-group">
             <label >事件</label>
@@ -69,7 +69,6 @@
 		  
 		  
           <input type="hidden" name="send_adimin" value="admin">
-          <input type="hidden" name="Id" value=<%= item._id %>>
 
           <input type="submit" name="" class="btn btn-info" value="保存">
         </form>

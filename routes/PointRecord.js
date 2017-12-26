@@ -45,14 +45,14 @@ router.get('/PointRecord', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"A"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"A"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"A"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"A"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecord', {
@@ -64,7 +64,7 @@ router.get('/PointRecord', function(req, res, next) {
          count: count,
          pages: pages,
          limit: limit,
-		 "username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
+		 "useemail":user.useemail,"userphone":user.userphone,"username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
 		 
       });
     })
@@ -102,14 +102,14 @@ router.get('/PointRecordB', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"B"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"B"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"B"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"B"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecordB', {
@@ -121,7 +121,7 @@ router.get('/PointRecordB', function(req, res, next) {
          count: count,
          pages: pages,
          limit: limit,
-		 "username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
+		  "useemail":user.useemail,"userphone":user.userphone,"username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
 		 
 		 
       });
@@ -159,14 +159,14 @@ router.get('/PointRecordC', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"C"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"C"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"C"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"C"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecordC', {
@@ -178,7 +178,7 @@ router.get('/PointRecordC', function(req, res, next) {
          count: count,
          pages: pages,
          limit: limit,
-		 "username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
+		  "useemail":user.useemail,"userphone":user.userphone,"username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
 		 
       });
     })
@@ -234,14 +234,14 @@ router.get('/getAPointRecord', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"A"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"A"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"A"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"A"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecord', {
@@ -253,7 +253,7 @@ router.get('/getAPointRecord', function(req, res, next) {
          count: count,
          pages: pages,
          limit: limit,
-		 "username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
+		  "useemail":user.useemail,"userphone":user.userphone,"username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
 		 
       });
     })
@@ -291,14 +291,14 @@ router.post('/getAPointRecord', function(req, res, next){
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"A"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"A"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"A"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"A"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecord', {
@@ -340,14 +340,14 @@ router.get('/getBPointRecord', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"B"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"B"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"B"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"B"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecordB', {
@@ -359,7 +359,7 @@ router.get('/getBPointRecord', function(req, res, next) {
          count: count,
          pages: pages,
          limit: limit,
-		 "username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
+		  "useemail":user.useemail,"userphone":user.userphone,"username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
 		 
       });
     })
@@ -394,14 +394,14 @@ router.post('/getBPointRecord', function(req, res, next){
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"B"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"B"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"B"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"B"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecordB', {
@@ -443,14 +443,14 @@ router.get('/getCPointRecord', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"C"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"C"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"C"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"C"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecordC', {
@@ -462,7 +462,7 @@ router.get('/getCPointRecord', function(req, res, next) {
          count: count,
          pages: pages,
          limit: limit,
-		 "username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
+		  "useemail":user.useemail,"userphone":user.userphone,"username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance	 
 		 
       });
     })
@@ -497,14 +497,14 @@ router.post('/getCPointRecord', function(req, res, next){
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.GivePointRecord.count({point_type:"C"}).then(function(count){
+  Model.GivePointRecord.count({username:req.session.user.username,point_type:"C"}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.GivePointRecord.find({point_type:"C"}).limit(limit).skip(skip).then(function( docs){
+    Model.GivePointRecord.find({username:req.session.user.username,point_type:"C"}).limit(limit).skip(skip).then(function( docs){
 
 	
       res.render('PointRecordC', {

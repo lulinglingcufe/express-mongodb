@@ -12,14 +12,14 @@ router.get('/order', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.Buy.count().then(function(count){
+  Model.Buy.count({"username":user.username}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.Buy.find({}).limit(limit).skip(skip).then(function( docs){
+    Model.Buy.find({"username":user.username}).limit(limit).skip(skip).then(function( docs){
       var user = req.session.user;
       res.render('order', {
          title: 'Express',
@@ -57,14 +57,14 @@ router.get('/getOrderpage', function(req, res, next) {
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.Buy.count().then(function(count){
+  Model.Buy.count({"username":user.username}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.Buy.find({}).limit(limit).skip(skip).then(function( docs){
+    Model.Buy.find({"username":user.username}).limit(limit).skip(skip).then(function( docs){
       var user = req.session.user;
       res.render('order', {
          title: 'Express',
@@ -110,20 +110,19 @@ router.post('/getOrderpage', function(req, res, next){
   // var skip = (page-1)*limit;   //跳过多少条
   var pages = 0;   //默认总页数
 
-  Model.Buy.count().then(function(count){
+  Model.Buy.count({"username":user.username}).then(function(count){
 
     pages = Math.ceil(count/limit);   // 计算总页数,向上取整3.5=4
     page = Math.min(page, pages);
     page = Math.max(page, 1);
     var skip = (page-1)*limit;   //跳过多少条
 
-    Model.Buy.find({}).limit(limit).skip(skip).then(function( docs){
+    Model.Buy.find({"username":user.username}).limit(limit).skip(skip).then(function( docs){
       var user = req.session.user;
       res.render('order', {
          title: 'Express',
          user: user,
          items: docs.reverse(),
-
          page: page,
          count: count,
          pages: pages,

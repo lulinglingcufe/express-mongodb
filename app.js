@@ -13,11 +13,15 @@ var logout = require('./routes/logout');
 var loginTest = require('./routes/loginTest');
 
 var test1 = require('./routes/test1');  //分页测试
-var test2 = require('./routes/test2');   //发货删除货物测试
-var test3 = require('./routes/test3');   //测试
+//var test2 = require('./routes/test2');   //发货删除货物测试
+//var test3 = require('./routes/test3');   //测试
 var PointRecord = require('./routes/PointRecord');   //测试
 
 var adminTest = require('./routes/adminTest');
+
+var adminlogin = require('./routes/adminlogin'); //admin管理员登录
+var adminMGoods = require('./routes/adminMGoods'); //代替test2 管理货物。
+var adminMpoint = require('./routes/adminMpoint'); //代替test3 管理积分记录。
 
 
 var admin = require('./routes/admin');
@@ -59,17 +63,17 @@ app.use('/', loginTest);
 app.use('/', logout);
 
 app.use('/', test1);
-app.use('/', test2);  //包括了删除还有发货操作，在一个js脚本里面
-app.use('/', test3);
+//app.use('/', test2);  //包括了删除还有发货操作，在一个js脚本里面
+//app.use('/', test3);
+app.use('/', adminlogin); //admin管理员登录
+app.use('/', adminMGoods); //代替test2 管理货物。
+app.use('/', adminMpoint); //代替test3 管理积分记录。
 
-app.use('/', PointRecord);
 
-
-//app.use('/adminTest', adminTest);
 
 
 app.use('/', adminTest);
-
+app.use('/', PointRecord);
 
 
 //app.use('/admin', admin);

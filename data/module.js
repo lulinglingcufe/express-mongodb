@@ -8,11 +8,26 @@ var articleSchema = new mongoose.Schema({
   views: {type: Number, default: 0}
 });
 
+//管理员信息
+var adminuserSchema = new mongoose.Schema({
+  useraccount: String,
+  username: String,
+  password: String,
+  date: {type: String, default: "notDecide"}
+  });
+  
+
+
+
+
 //用户信息
 var userSchema = new mongoose.Schema({
   useraccount: String,
   username: String,
-  password: String
+  password: String,
+  date: {type: String, default: "notDecide"},
+  email: {type: String, default: "notDecide"},
+  phone: {type: String, default: "notDecide"}
   });
   
  //产品
@@ -62,7 +77,12 @@ var Model = {
   User: mongoose.model('User', userSchema),
   Buy: mongoose.model('Buy', userBuySchema),
   Recevier: mongoose.model('Recevier', recevierSchema),
-  GivePointRecord: mongoose.model('GivePointRecord', givepointrecordSchema)
+  GivePointRecord: mongoose.model('GivePointRecord', givepointrecordSchema),
+  adminUser: mongoose.model('adminUser', adminuserSchema)
+  
+  
+  
+  
   
 };
 
