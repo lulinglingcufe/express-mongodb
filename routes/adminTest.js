@@ -102,6 +102,7 @@ router.post('/buy',function(req,res,next){
       ss = date.getSeconds();
 
 	  
+	  
   var newBuy = new Model.Buy({
     username: req.session.user.username,
     itemname: thing,

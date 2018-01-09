@@ -30,7 +30,7 @@ var userSchema = new mongoose.Schema({
   phone: {type: String, default: "notDecide"}
   });
   
- //产品
+ //订单
 var userBuySchema = new mongoose.Schema({
   username: String,   //下单人
   itemname: String,
