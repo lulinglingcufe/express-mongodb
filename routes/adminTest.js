@@ -2,10 +2,6 @@ var express = require('express')
 var router = express.Router()
 var Web3 = require('web3')
 var Model = require('../data/module');
-
-
-
-
 var web3 = new Web3()
 web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'))
 var abi = [ { "constant": true, "inputs": [], "name": "name", "outputs": [ { "name": "", "type": "string", "value": "" } ], "type": "function" }, { "constant": false, "inputs": [ { "name": "_spender", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "approve", "outputs": [ { "name": "success", "type": "bool" } ], "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [ { "name": "", "type": "uint256", "value": "1000000" } ], "type": "function" }, { "constant": false, "inputs": [ { "name": "_from", "type": "address" }, { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transferFrom", "outputs": [ { "name": "success", "type": "bool" } ], "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [ { "name": "", "type": "uint8", "value": "0" } ], "type": "function" }, { "constant": false, "inputs": [ { "name": "_value", "type": "uint256" } ], "name": "burn", "outputs": [ { "name": "success", "type": "bool" } ], "type": "function" }, { "constant": true, "inputs": [], "name": "standard", "outputs": [ { "name": "", "type": "string", "value": "Token 0.1" } ], "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" } ], "name": "balanceOf", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "type": "function" }, { "constant": false, "inputs": [ { "name": "_from", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "burnFrom", "outputs": [ { "name": "success", "type": "bool" } ], "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [ { "name": "", "type": "string", "value": "A" } ], "type": "function" }, { "constant": false, "inputs": [ { "name": "_to", "type": "address" }, { "name": "_value", "type": "uint256" } ], "name": "transfer", "outputs": [], "type": "function" }, { "constant": false, "inputs": [ { "name": "_spender", "type": "address" }, { "name": "_value", "type": "uint256" }, { "name": "_extraData", "type": "bytes" } ], "name": "approveAndCall", "outputs": [ { "name": "success", "type": "bool" } ], "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" }, { "name": "", "type": "address" } ], "name": "allowance", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "type": "function" }, { "inputs": [ { "name": "initialSupply", "type": "uint256", "index": 0, "typeShort": "uint", "bits": "256", "displayName": "initial Supply", "template": "elements_input_uint", "value": "1000000" }, { "name": "tokenName", "type": "string", "index": 1, "typeShort": "string", "bits": "", "displayName": "token Name", "template": "elements_input_string", "value": "积分A" }, { "name": "decimalUnits", "type": "uint8", "index": 2, "typeShort": "uint", "bits": "8", "displayName": "decimal Units", "template": "elements_input_uint", "value": "0" }, { "name": "tokenSymbol", "type": "string", "index": 3, "typeShort": "string", "bits": "", "displayName": "token Symbol", "template": "elements_input_string", "value": "A" } ], "type": "constructor" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "from", "type": "address" }, { "indexed": true, "name": "to", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Transfer", "type": "event" }, { "anonymous": false, "inputs": [ { "indexed": true, "name": "from", "type": "address" }, { "indexed": false, "name": "value", "type": "uint256" } ], "name": "Burn", "type": "event" } ]
@@ -24,12 +20,8 @@ var c = web3.eth.contract(abi).at(cAddress);
 router.get('/adminTest', function(req, res, next) {
   var user = req.session.user;
   var userRecevier = req.session.userRecevier;
-  
-  
   if(user && user.username){
-	
 	var account = user.useraccount
-
 	//账户积分余额
     var aBalance = a.balanceOf(account);
     var bBalance = b.balanceOf(account);
@@ -37,23 +29,14 @@ router.get('/adminTest', function(req, res, next) {
 	console.log(account)
 	if(userRecevier){
 		res.render('adminTest',{"recevierAddress":userRecevier.recevierAddress,"recevierPhone":userRecevier.recevierPhone,"recevierName":userRecevier.recevierName,"username":user.username,"useemail":user.useemail,"userphone":user.userphone,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance})
-	}else{
-		
+	}else{	
 		res.render('adminTest',{"recevierAddress":"userRecevier.recevierAddress","recevierPhone":"userRecevier.recevierPhone","recevierName":"userRecevier.recevierName","username":user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance})
 	}
-	
-	
-	
-  
   }else{
     res.redirect('/loginTest');
     return;
   }
 });
-
-
-
-
 
 router.get("/unlock",function(req,res,next){
 
@@ -100,8 +83,6 @@ router.post('/buy',function(req,res,next){
       hh = date.getHours(),
       mm = date.getMinutes(),
       ss = date.getSeconds();
-
-	  
 	  
   var newBuy = new Model.Buy({
     username: req.session.user.username,
@@ -127,10 +108,6 @@ router.post('/buy',function(req,res,next){
  res.send({hash:hash});
  
 })
- 
- 
-
-
 
 router.post("/ex",function(req,res,next){
 	var account1 = web3.eth.accounts[0];
@@ -226,17 +203,12 @@ router.get('/dataJson',function(req,res,next){
 
 */
 
-
 router.get('/exchange',function(req,res,next){
 	var account = req.session.user.useraccount;
-
 	//账户积分余额
     var aBalance = a.balanceOf(account);
     var bBalance = b.balanceOf(account);
     var cBalance = c.balanceOf(account); 
-	
-	
-	
 	res.render('exchange',{"useemail":req.session.user.useemail,"userphone":req.session.user.userphone,"username":req.session.user.username,"aBalance":aBalance,"bBalance":bBalance,"cBalance":cBalance})
 })
 
@@ -303,6 +275,7 @@ router.get("/transInfo",function(req,res,next){
 
 
 //这里是不是默认对所有账户都有所属权限？？。因为密码都明文写在里面的（硬编码）告诉了。
+
 router.post("/send",function(req,res,next){
 	var account1 = req.body.account1;
 	var account2 = req.body.account2;
@@ -327,34 +300,6 @@ router.post("/send",function(req,res,next){
 		console.log(hash);
     res.send({hash:hash});
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 module.exports = router;

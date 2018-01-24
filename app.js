@@ -23,7 +23,6 @@ var adminlogin = require('./routes/adminlogin'); //admin管理员登录
 var adminMGoods = require('./routes/adminMGoods'); //代替test2 管理货物。
 var adminMpoint = require('./routes/adminMpoint'); //代替test3 管理积分记录。
 
-
 var admin = require('./routes/admin');
 var adminAdd = require('./routes/adminAdd');
 var adminUpdate = require('./routes/adminUpdate');

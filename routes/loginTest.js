@@ -3,25 +3,17 @@ var router = express.Router();
 var Model = require('../data/module');
 var sha1 = require('sha1');
 
-
 /* GET home page. */
 router.get('/loginTest', function(req, res, next) {
   res.render('loginTest', { title: 'Express' });
 });
-
-
-
 router.post('/loginTestsignIn', function(req, res, next){
   var userName = req.body.userName;
   var passWord = req.body.passWord;
-
   if(!userName || !passWord){
 		res.send("账户或密码不能为空！");
 		return;
-	}
-	
-
-  
+	}	
   Model.User.findOne({username: userName}, function(err, doc){
     if(err){
       console.log(err);
@@ -41,9 +33,7 @@ router.post('/loginTestsignIn', function(req, res, next){
     res.send('用户名或者密码错误');
     return;
   })
-  
-  	
-	//将“该“用户的默认收件人信息存储在session里面
+	//将该用户的默认收件人信息存储在session里面
     Model.Recevier.findOne({author: userName,AddressStatus:"默认地址"}, function(err, doc){
       if(err){
         console.log(err);
@@ -56,8 +46,6 @@ router.post('/loginTestsignIn', function(req, res, next){
 		return;
       }
     })  
-  
-  
 })
 
 
